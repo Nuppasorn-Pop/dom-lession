@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .btn{
+        background-color: blanchedalmond;
+    }
+    </style>
+</head>
+<body>
+    <!-- วิธีการเขียน -->
+    <!-- วิธีที่ 1 เขียนลงใน html เปรียบเป็น attribute มีข้อเสียคือไปเขียนลงใน HTML -->
+    <button class="btn" onclick="alert('Submit')">Submit</button> 
+
+    <button class="btn2">Submit2</button> 
+
+    <button class="btn3">Submit3</button> 
+
+    <button class="btn4">Submit4</button> 
+
+    <button class="btn5">Submit5</button> 
+
+    <ul>
+        <li data-name="John">John</li>
+        <li data-name="Max">Max</li>
+        <li data-name="Jane">Jane</li>
+        <li data-name="Jim">Jim</li>
+    </ul>
+
+    <img src="https://static.cdntap.com/tap-assets-prod/wp-content/uploads/sites/25/2018/08/c1.jpg?width=700&quality=95" alt="">
+    <input class='picture' type="file" multiple hidden/> 
+    <!-- attribute : multiple -> เลือกรูปได้หลายรูป -->
+    
+    <input type="text" placeholder="Enter something" value="test">
+    <a href="https://google.com">go to google</a> 
+    <!-- Default action ของ a tag คือ send request ไปที่ href เว็บไซต์นั้น -->
+    <!-- เราสามารถยกเลิกการทำงานของ Default action ได้โดยใช้ preventDefault-->
+    
+    <div style="background-color: aqua; width: 600px; height: 600px;" id="outer">
+        <div style="background-color: red; width: 400px; height: 400px;" id="middle">
+            <div style="background-color: yellow; width: 200px; height: 200px;" id="inner"></div>
+        </div>   
+    </div>
+
+    <script>
+        // วิธีที่ 2 เขียนลงใน script --> ข้อเสีย รันได้ fn Listener ได้ตัวเดียว
+        const button = document.querySelector('.btn2')
+        button.onclick = function(){
+            alert('submit #2')
+        }
+
+        button.onclick = click1;  // ไม่รัน
+        button.onclick = click2; // --> เป็นการ reassign
+        
+        // วิธีที่ 3 เขียนลงใน script addEventListener(ชื่ออีเวนท์, function () )--> callback fn --> ข้อดี รันได้หลาย fn **นิยมใช้กับ logic ที่มีความซับซ้อน
+        function click1(){
+            alert('click1')
+        }
+        function click2(){
+            alert('click2')
+        }
+
+        const button3 = document.querySelector('.btn3');
+        // รัน 1 fn
+       /* button3.addEventListener('click', function (){
+            alert('submit #3')
+        }) */
+
+        // รันหลาย fn
+        button3.addEventListener('click',click1);
+        button3.addEventListener('click',click2);
+
+        // remove eventListener
+        setTimeout(() => {
+            button3.removeEventListener('click',click1);
+        }, 5000); // --> ผ่านไป 5 วินาที ยกเลิก fn listener
+
+
+        // document.addEventListener('click',function(){
+        //     alert('click somewhere');
+        // });
+
+        // ข้อควรระวัง remove eventListener
+        const button4 = document.querySelector('.btn4');
+        button4.addEventListener('click', function () {
+            alert('click4');
+        }); // --> มีการศประกาศ fn ที่ adress 1 
+
+        setTimeout(
+            () => 
+            button4.removeEventListener('click', function () {
+                alert('click4');
+            }), 5000
+        ) // --> ไม่ลบเนื่องจาก --> มีการประกาศ fn ที่ adress 2 ดังนั้น fn 2 ตัวนี้จึงเป็นคนละตัวกัน จะเขียนแบบ Annonymous fn ตรง ๆ ไม่ได้
+
+        // วิธีแก้คือ 
+        button4.addEventListener('click', click1);
+        setTimeout(() => button4.removeEventListener('click', click1), 5000);
+        
+
+
+        // this
+        // ex.1
+        button.addEventListener('click',function(){
+            console.log(this);
+        }); // --> this = button
+
+        // ex.2
+        const list = document.querySelectorAll('li')
+        for (let li of list){
+            li.addEventListener('click',function(){
+                console.log(li.dataset.name);
+            });
+        }
+
+        // event object (event เป็น method หนึ่งของ object)
+        const button5 = document.querySelector('.btn5');
+        button5.addEventListener('click',function(event){
+            console.log(event);
+        }) // --> browser เรียกใช้งาน event เมื่อ Click ที่ button5(target) แล้ว event ที่เกิดขึ้นแสดง Property(detail) ในรูปแบบ object event
+
+        // input --> เก็บค่าที่ user พิมพ์ได้
+        const input = document.querySelector('input');
+        input.addEventListener('input', function(event){
+            console.log(event.target.value); // --> event.target = input ---> input.value = ตัวที่ user พิมพ์
+            console.log(event.currentTarget); // --> currentTarget = input
+        }); 
+
+        // ความแตกต่างระหว่าง event.target VS event.currentTarget
+        /* document.body.addEventListener('click', function(event){
+            console.log(event.target); // click ตรงไหน event.target คือตรงนั้น
+            console.log('-------------------');
+            console.log(event.currentTarget); // currentTarget = document.body
+        })
+        */
+
+
+        // method : preventDefault
+        // ex.1
+        const aTag = document.querySelector('a');
+        aTag.addEventListener('click', function(event){
+            event.preventDefault();
+            alert('you cannot leave');
+        })
+        // ใช้เมื่อเวลาเรากรอกข้อมูลยังไม่เสร็จ แล้วกดลิงค์ไปหน้าอื่น มันจะแจ้งเตือนว่ากรอกข้อมูลไม่เสร็จ จะออกไหม
+
+        // ex.2
+        // ก่อนจะส่งข้อมูล send request ไปที่ sever ควรจะตรวจสอบก่อนว่า input ถูกต้องหรือไม่
+
+        /* const form = document.querySelector('form');
+        form.addEventListener('submit', function(event){
+            event.preventDefault();
+            // validarte if all input value
+            // all correct => submit form
+            form.submit();
+            // something incorrect => show error message to user
+        })
+        */
+
+        // Event bubbling
+        // event.stopPropagation() : หยุด Event bubbling ได้
+        outer.addEventListener('click', function(){
+            console.log('click outer')
+        }) 
+        middle.addEventListener('click', function(event){
+            event.stopPropagation()
+            console.log('click middle')
+        }) 
+        inner.addEventListener('click', function(){
+            console.log('click inner')
+        }) 
+        // ไม่ควรเขียนวิธีนี้ เพราะจะงงว่า outer middle inner มาจากไหน
+        // เมื่อเราคลิก ที่ inner มันจะเกิด Event bubbling มันจะรัน middle outer ... ไปจนถึง document ดังนั้นถ้าถ้าเราจะหยุดให้ใช้ event.stopPropagation()
+
+
+        // keydown
+        input.addEventListener('keydown', function(event){
+            console.log(event);
+            if(
+                event.key !== event.key.toLocaleUpperCase() && 
+                event.key !== 'Backspace'
+            ) {
+                event.preventDefault();
+            }
+        })
+
+
+        const filePic = document.querySelector('.picture');
+        let image = document.qurySelector('img');
+        image.addEventListener('click', function(){
+            filePic.click();
+        })
+
+    </script>
+</body> 
+</html>

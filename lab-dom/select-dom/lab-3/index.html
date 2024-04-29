@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h2 class="title-1">List of companies</h2>
+        <ul>
+          <li data-product-id="1" data-name="google">Google</li>
+          <!-- key data ชื่อว่า product-id -->
+          <li class="active" id="2">Yahoo</li>
+          <li id="3">Tencent</li>
+        </ul>
+        <input type = 'password' class="text-center">
+      </div>
+    <script>
+        const li_1 = document.querySelector('#\\33')
+        console.log(li_1)
+        const li_2 = document.querySelectorAll('#\\33')[0]
+        console.log(li_2)
+        const li_3 = document.getElementById('3')
+        console.log(li_3)
+        const li_4 = document.getElementsByTagName('li')[2]
+        // const li_4 = document.getElementsByTagName('li')[2].innerHTML // Tencent
+        console.log(li_4)
+
+
+        
+        // console.log('#\\33' ,typeof '#\\33')
+        // const input = document.querySelector('input')
+        // console.log(input)
+        // const firstLi = document.querySelector("li")
+        // console.log(firstLi.dataset.productId) 
+        // console.log(firstLi.dataset.name) 
+    </script>
+</body>
+</html>
+
+<!-- 
+จงเขียนคำสั่งเพื่อ access <li> ตัวที่สาม โดยใช้วิธีต่อไปนี้
+    querySelector
+    querySelectorAll
+    getElementById
+    getElementsByTagName -->
+
+<!-- \\ ===> '/' -->
+    

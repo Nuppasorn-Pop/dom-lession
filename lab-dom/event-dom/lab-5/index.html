@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input name="nickname" type="text">
+    <input name="job" type="text">
+    <script>
+        const nameInput = document.querySelectorAll('input')
+        for (let name of nameInput){
+            name.addEventListener('click',() => console.log(event.target.name))
+            name.addEventListener('keydown', function(event){
+                console.log(event.key)
+            })
+        }
+    </script>
+</body>
+</html>
+
+<!-- 
+จงสร้าง <input> และมี attribute ชื่อ name มีค่าเท่ากับ “nickname”
+จงสร้าง <input> อีกอันให้มี attribute ชื่อ name มีค่าเท่ากับ “job”
+เมื่อผู้ใช้ click ที่ <input> ให้ console.log ค่า attribute name ของ <input>
+เมื่อผู้ใช้พิมพ์ค่าลงใน <input> ให้ console.log ค่าที่ผู้ใช้พิมพ์
+Hint: event.target และ oninput event -->

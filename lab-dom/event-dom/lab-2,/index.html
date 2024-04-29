@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- HTML-attribute -->
+    <form action="">
+        <button onclick = 'buttonClick()' >submit 1 </button> 
+    </form>
+
+    <!-- DOM property -->
+    <form action="">
+        <button class="A">submit 2 </button> 
+    </form>
+
+    <!-- Event listener -->
+    <form action="">
+        <button class="B">submit 3 </button> 
+    </form>
+
+    <script>
+    function buttonClick(){
+        alert('Form is submitted');
+    }
+    function buttonClick2(){
+        alert('Form is submitted2');
+    }
+
+    // ##### DOM property #####
+    const buttonA = document.querySelector('.A');
+    // แบบ 1 
+    /* buttonA.onclick = () => {
+        alert('Form is submitted');
+    }
+    */
+
+    // แบบ 2
+    buttonA.onclick = buttonClick
+
+
+    // ##### Event listener #####
+    const buttonB = document.querySelector('.B');
+    buttonB.addEventListener('click',buttonClick)
+    buttonB.addEventListener('click',buttonClick2)
+
+    // #### ยกเลิก Event Handler ####
+    buttonB.removeEventListener('click',buttonClick2)
+
+    </script>
+</body>
+</html>
+
+<!-- 
+จงสร้าง Form ที่มี Button สำหรับ submit form และเขียนคำสั่งเพิ่ม Event Handler 
+ลงใน Form เมื่อผู้ใช้กด submit form ให้ Alert คำว่า “Form is submitted” โดยใช้วิธีดังนี้
+HTML-attribute
+DOM property
+Event listener
+จงเขียนคำสั่งยกเลิก Event Handler -->

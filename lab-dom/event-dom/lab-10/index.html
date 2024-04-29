@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .dataAdress {
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+        gap: 5px;
+      }
+
+      .province,
+      .district {
+        display: flex;
+        gap: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dataAdress">
+      <div class="province">
+        <label>Province</label>
+        <select name="province" id="province">
+          <option value="Bangkok">Bangkok</option>
+          <option value="Chiang Mai">Chiang Mai</option>
+          <option value="chonburi">Chonburi</option>
+        </select>
+      </div>
+
+      <div class="district">
+        <label>District</label>
+        <select name="district" id="district">
+          <option value="" class="addDistrict"></option>
+        </select>
+      </div>
+    </div>
+    <script>
+      const province = document.querySelector("#province");
+      const district = document.querySelector(".addDistrict");
+      // const option = document.querySelectorAll('option')
+      const data = [
+        { Bangkok: ["Klongsamwa", "Minburi"] },
+        { ChiangMai: ["Chom Thong", "Mae Rim"] },
+        { Conburi: ["Phanat Nikhom", "Si Racha"] },
+      ];
+
+      
+
+
+
+      province.addEventListener("click", );
+
+      // console.log(province.children[0].innerHTML)
+    </script>
+  </body>
+</html>
+<!-- 
+จงสร้าง Label และ Select ดังรูป
+เมื่อ click <select> ของ Province ให้แสดงรายชื่อจังหวัด
+เมื่อ click <select> ของ District ให้แสดงอำเภอของจังหวัดที่ถูกเลือก -->
