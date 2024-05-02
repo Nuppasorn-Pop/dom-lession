@@ -33,22 +33,21 @@
       const selectAdd = document.querySelector(".add");
       const selectUl = document.querySelector("ul");
 
-
       function AddTask(event) {
         const li = document.createElement("li");
         const task = document.createElement("p");
         const edit = document.createElement("button");
         const del = document.createElement("button");
-        
-        task.textContent = "Task 1"
+
+        task.textContent = "Task 1";
         edit.textContent = "Edit";
         del.textContent = "Del";
-    
 
         li.appendChild(selectUl);
         task.append(li);
         edit.append(li);
         del.append(li);
+        return li;
       }
 
       selectAdd.addEventListener("click", AddTask);
