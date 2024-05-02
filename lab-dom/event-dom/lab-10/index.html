@@ -25,35 +25,40 @@
         <label>Province</label>
         <select name="province" id="province">
           <option value="Bangkok">Bangkok</option>
-          <option value="Chiang Mai">Chiang Mai</option>
-          <option value="chonburi">Chonburi</option>
+          <option value="ChiangMai">Chiang Mai</option>
+          <option value="Chonburi">Chonburi</option>
         </select>
       </div>
 
       <div class="district">
         <label>District</label>
-        <select name="district" id="district">
-          <option value="" class="addDistrict"></option>
-        </select>
+        <select name="district" id="district"></select>
       </div>
     </div>
     <script>
-      const province = document.querySelector("#province");
-      const district = document.querySelector(".addDistrict");
-      // const option = document.querySelectorAll('option')
-      const data = [
-        { Bangkok: ["Klongsamwa", "Minburi"] },
-        { ChiangMai: ["Chom Thong", "Mae Rim"] },
-        { Conburi: ["Phanat Nikhom", "Si Racha"] },
-      ];
+      const selectProvince = document.getElementById("province");
+      const selestDistrict = document.getElementById("district");
 
-      
+      const data = {
+        Bangkok: ["Klongsamwa", "Minburi"],
+        ChiangMai: ["Chom Thong", "Mae Rim"],
+        Chonburi: ["Phanat Nikhom", "Si Racha"],
+      };
 
+      function District(event) {
+        const province = event.target.value; // --> Bangkok
+        const districtArr = data[province]; // --> ["Klongsamwa", "Minburi"]
 
+        selestDistrict.innerHTML = "";
 
-      province.addEventListener("click", );
-
-      // console.log(province.children[0].innerHTML)
+        districtArr.forEach((district) => {
+          const option = document.createElement("option");
+          option.innerHTML = district;
+          option.value = district;
+          selestDistrict.append(option);
+        });
+      }
+      selectProvince.addEventListener("change", District);
     </script>
   </body>
 </html>

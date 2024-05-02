@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        display: flex;
+        gap: 10px;
+      }
+
+      .box > button {
+        width: 100px;
+      }
+
+      .box > p {
+        padding: 0px 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <button class="add">+</button>
+      <p>0</p>
+      <button class="minus">-</button>
+      <button class="reset">Reset</button>
+    </div>
+
+    <script>
+      const selectAdd = document.querySelector(".add");
+      const selectMinus = document.querySelector(".minus");
+      const selectReset = document.querySelector(".reset");
+      const selectCount = document.querySelector("p");
+
+      function Add(event) {
+        let currentCount = +selectCount.innerText;
+        let newCount = currentCount + 1;
+        selectCount.innerText = newCount;
+      }
+
+      function Minus(event) {
+        let currentCount = +selectCount.innerText;
+        if (currentCount > 0) {
+          let newCount = currentCount - 1;
+          selectCount.innerText = newCount;
+        }
+      }
+
+      function Reset(event) {
+        selectCount.innerText = 0;
+      }
+
+      selectAdd.addEventListener("click", Add);
+      selectMinus.addEventListener("click", Minus);
+      selectReset.addEventListener("click", Reset);
+    </script>
+  </body>
+</html>
+
+<!-- จงสร้าง Counter มี button การทำงานและตัวเลขดังรูป
+เมื่อผู้ใช้ click + ให้เพิ่มค่าตัวเลขขึ้น 1
+เมื่อผู้ใช้ click - ให้ลดค่าตัวเลขลง 1
+เมื่อผู้ใช้ click Reset ให้ reset ค่าตัวเลขเป็น 0
+ตัวเลขห้ามติดลบ -->
